@@ -8,7 +8,7 @@ import random
 import re
 order_id=random.randint(1,100000)
 app=Flask(__name__)
-@app.route("/index")
+@app.route("/")
 def index():
     return render_template("index.html")
 @app.route("/", methods=["get", "post"])
