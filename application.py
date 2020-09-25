@@ -11,7 +11,7 @@ app=Flask(__name__)
 @app.route("/")
 def index():
     return render_template("index.html")
-@app.route("/", methods=["get", "post"])
+@app.route("/webhook", methods=["get", "post"])
 def webhook():
     req=request.json
     #print(req)
