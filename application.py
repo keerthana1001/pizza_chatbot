@@ -51,8 +51,19 @@ def makeWebhookResult(req):
             print(pizza_size,pizza_crust,name,phoneno,pizza_type)
             information.insert_one({'name':name,'_id':order_id,'phone_number':phoneno,'pincode':pincode,'pizza_type':pizza_type,'pizza_size':pizza_size,'pizza_crust':pizza_crust,'status':'ordered'})
             speech="The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"
+            return {
+  "fulfillmentMessages": [
+    {
+      "text": {
+        "text": [
+          "Text response from webhook"
+        ]
+      }
+    }
+  ]
+}
             #return {"payload": {"google": {"expectUserResponse": True,"richResponse": {"items": [{"simpleResponse": {"textToSpeech": speech,"displayText": speech}}]}}}}
-            return {"fulfillmentMessages": [{"text": {"text": ["The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"]}}]}
+            #return {"fulfillmentMessages": [{"text": {"text": ["The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"]}}]}
 
     if req.get("queryResult").get("queryText")==str(order_id) or req.get("queryResult").get("queryText")==[r['_id']for r in information.find({'_id'})]:
         print(str(order_id))
