@@ -73,6 +73,5 @@ def makeWebhookResult(req):
 
 
 if __name__ == "__main__":
-    port = int(os.getenv('PORT', 4000))
-    print("starting on port %d" % (port))
-    app.run(debug=True, port=4000)
+    
+    app.run()
