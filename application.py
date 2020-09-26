@@ -52,7 +52,7 @@ def makeWebhookResult(req):
             information.insert_one({'name':name,'_id':order_id,'phone_number':phoneno,'pincode':pincode,'pizza_type':pizza_type,'pizza_size':pizza_size,'pizza_crust':pizza_crust,'status':'ordered'})
             speech="The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"
             
-            return {"fulfillmentText":"This is response"}
+            return {"fulfillmentText":speech}
             #return {"payload": {"google": {"expectUserResponse": True,"richResponse": {"items": [{"simpleResponse": {"textToSpeech": speech,"displayText": speech}}]}}}}
             #return {"fulfillmentMessages": [{"text": {"text": ["The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"]}}]}
 
