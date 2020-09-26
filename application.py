@@ -60,15 +60,16 @@ def makeWebhookResult(req):
                 order_id) + ". Enter your order id to check status"
 
             return {
-                "fulfillmentText": "The total amount is Rs. 250. Your order will be delivered to " + pincode + " in 30 minutes. You have ordered " + pizza_type+pizza_size + " with " + pizza_crust + " crust. Your order id is " + str(order_id) + ". Enter your order id to check status"}
+                "fulfillmentText": "The total amount is Rs. 250. Your order will be delivered to " + pincode + " in 30 minutes. You have ordered " + pizza_type + pizza_size + " with " + pizza_crust + " crust. Your order id is " + str(order_id) + ". Enter your order id to check status (eg. status: <your_order_id>)"}
             # return {"payload": {"google": {"expectUserResponse": True,"richResponse": {"items": [{"simpleResponse": {"textToSpeech": speech,"displayText": speech}}]}}}}
             # return {"fulfillmentMessages": [{"text": {"text": ["The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"]}}]}
 
-    elif req.get("queryResult").get("queryText") == str(order_id):                                                                                                            
-                                                                                                               
-                                                                                                                   
-                                                                                                                       
-        print(str(order_id))
+    elif req.get("queryResult").get("queryText") == "status:" + str(order_id):
+        response=req.get("queryResult").get("queryText")
+        order=response.split('+')
+        res=order[1].strip()
+        res=int(res)
+        #print(str(order_id))
         conn = connection.connectmongo()
         print(f"Connection status : {conn}")
 
@@ -76,13 +77,13 @@ def makeWebhookResult(req):
             return err.ReturnConnectionError()
         else:
             information = conn.pizza_customer
-            res = req.get("queryResult").get("queryText")
-            res = int(res)
+            #res = req.get("queryResult").get("queryText")
+            #res = int(res)
             print(res)
             for r in information.find({'_id': res}):
                 status = r['status']
                 print(status)
-                return {"fulfillmentText":status}
+                return {"fulfillmentText": status}
 
 
 if __name__ == "__main__":
