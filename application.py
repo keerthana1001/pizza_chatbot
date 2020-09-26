@@ -64,7 +64,7 @@ def makeWebhookResult(req):
             # return {"payload": {"google": {"expectUserResponse": True,"richResponse": {"items": [{"simpleResponse": {"textToSpeech": speech,"displayText": speech}}]}}}}
             # return {"fulfillmentMessages": [{"text": {"text": ["The total amount is Rs. 250. Your order will be delivered to "+pincode+" in 30 minutes. You have ordered "+pizza_type,pizza_size+" with "+pizza_crust+" crust. Your order id is "+str(order_id)+". Enter your order id to check status"]}}]}
 
-    if req.get("queryResult").get("queryText") == str(order_id):                                                                                                            
+    elif req.get("queryResult").get("queryText") == str(order_id):                                                                                                            
                                                                                                                
                                                                                                                    
                                                                                                                        
